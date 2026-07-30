@@ -8,9 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- SDK 风格项目默认不引用 WinForms / Drawing，需显式声明（来自 .NET Framework 目标包） -->
+    <!-- SDK 风格项目默认不引用以下程序集，需显式声明（来自 .NET Framework 目标包） -->
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Drawing" />
+    <Reference Include="Microsoft.CSharp" /> <!-- dynamic 晚期绑定必需 -->
 
     <!-- 让没有安装 .NET Framework 4.8 目标包的机器（如 GitHub 运行器）也能编译 -->
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3">
