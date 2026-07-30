@@ -1,0 +1,28 @@
+name: build
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Build Release
+        run: dotnet build src/OfficeAutoSave.csproj -c Release -o build-output
+
+      - name: Add install scripts
+        shell: pwsh
+        run: Copy-Item install.ps1, uninstall.ps1 build-output/
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: OfficeAutoSave
+          path: build-output
